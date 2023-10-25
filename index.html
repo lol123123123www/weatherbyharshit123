@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="weather" content = "width= device-width,initial-scale=1.0">
+<title>weather app - definetly made by harshit</title>
+<link rel="stylesheet" href ="styles.css">
+</head>
+<body bgcolor="maroon">
+
+
+
+<div class = "card">
+ <div class="search">
+  <input type ="text" spellcheck="false" placeholder="password will appear here">
+   <button><img src ="img/qwe2.png"></button>
+ </div>
+ <div class="city">
+   <h1 class="name">City Name</h1>
+ </div>
+ <div class="temperature">
+    <h1 class ="type0">TEMPERATURE</h1>
+    <h1 class ="temp"></h1>
+    <img src="img/zxc2.png" class="weather icon">
+ </div>
+ <div class="details">
+ <div class="humid">
+   <h1 class ="type1">HUMIDITY</h1>
+   <h1 class ="humidity"></h1>
+   <img src="img/poi2.png">
+ </div>
+ <div class="wind">
+   <h1 class="type2">WIND SPEED</h1>
+   <h1 class="speed"></h1>
+     <img src="img/lkj2.png">
+</div>
+
+ </div>
+</div>
+
+<script>
+const apiKey = "8d4476c5fe97ea046e69b6868e71b5d5";
+const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+
+async function checkWeather(city){
+  const response = await fetch(apiurl + city  +  `&appid=${apiKey}`);
+  var data = await response.json();
+
+  console.log(data);
+
+  document.querySelector(".city").innerHTML = data.name; 
+  document.querySelector(".temp").innerHTML =  Math.round(data.main.temp) + "*C";
+  document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+  document.querySelector(".speed").innerHTML = data.wind.speed + "Km/hr";
+
+}
+searchBtn.addEventListener("click" , ()=>{
+checkWeather(searchBox.value);
+})
+
+</script>
+</body>
+</html>
